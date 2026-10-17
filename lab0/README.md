@@ -1,6 +1,6 @@
 # OUT1015 Zero Trust Security with OCI — Lab 0 setup package
 
-This package builds the Summit Retail environment that the hands-on labs use. You run it once, in your own Cloud Shell, at the start of the workshop. It takes about 15 minutes, most of it waiting for the servers to finish setting up.
+This package builds the Summit Retail environment that the hands-on labs use. You run it once, in your own Cloud Shell, at the start of the workshop. It takes about 20 minutes, most of it waiting for the servers to finish setting up.
 
 ## What it creates in your compartment
 
@@ -47,7 +47,7 @@ That is 48 resources in total: 3 VMs (Arm A1, 1 OCPU and 6 GB each), 2 load bala
    python3 lab.py plan
    ```
 
-   Expected last lines: `Reviewed plan scope: {"create": 48, "update": 0, "delete": 0}`.
+   Expected last line: `Reviewed plan scope: {"create": 48, "update": 0, "delete": 0}`. Ignore Terraform's own suggestion to run `terraform apply`; use the next step instead.
 
 5. Create the resources, and wait for the command to finish (about 5 minutes):
 
@@ -55,20 +55,27 @@ That is 48 resources in total: 3 VMs (Arm A1, 1 OCPU and 6 GB each), 2 load bala
    python3 lab.py apply
    ```
 
-6. Check the two web applications. The servers finish installing software a few minutes after they start, so rerun this command every minute until both lines report a match:
+6. Check the environment. The servers finish installing software after they start, and the private VM's Bastion plugin can take up to 15 minutes after `apply`. Rerun this command every minute until it ends with `Environment ready.`:
 
    ```bash
    python3 lab.py status
    ```
 
-   Expected:
+   Expected (your addresses differ):
 
    ```text
+   Your Summit Retail environment (all values are saved in .local/outputs.json):
+     tools_public_ip  150.136.72.83
+     app_private_ip   10.42.1.207
+     order_url        http://129.80.254.190
+     catalogue_url    http://157.151.217.8
    Orders: HTTP 200; expected body matched: True
    Catalogue: HTTP 200; expected body matched: True
+   Bastion plugin on the order application VM: RUNNING
+   Environment ready.
    ```
 
-7. Note the values the command prints. You use `tools_public_ip`, `app_private_ip`, `order_url` and `catalogue_url` in the labs.
+7. Note the four values at the top. You use them in the labs.
 
 Keep the `~/out1015-lab` folder for the whole workshop. Your SSH private key is `~/out1015-lab/.local/workshop_ssh`. It stays in Cloud Shell; do not share it.
 
@@ -91,7 +98,8 @@ ssh -i ~/out1015-lab/.local/workshop_ssh opc@<tools_public_ip>
 | `Expected exactly one active compartment named ...` | Check the compartment name in your lab details and run `python3 lab.py prepare --compartment <name>`. |
 | `Inputs already exist` | You already ran `prepare` in this folder. Continue with `plan`. |
 | Limit, quota or capacity error during `apply` | Do not retry in another folder. Tell your instructor and keep the folder as it is. |
-| `status` shows `not verified` | The servers are still installing software. Wait a minute and run `status` again. |
+| `status` ends with `Not ready yet` | The servers are still starting. Wait a minute and run `status` again; it can take up to 15 minutes after `apply`. |
+| `REMOTE HOST IDENTIFICATION HAS CHANGED` when you use SSH | You rebuilt the lab and Cloud Shell remembers the old VM. Run `ssh-keygen -R <address>` and connect again. |
 
 ## Clean up after the workshop
 
