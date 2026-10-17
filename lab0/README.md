@@ -30,7 +30,13 @@ That is 48 resources in total: 3 VMs (Arm A1, 1 OCPU and 6 GB each), 2 load bala
    wget -O ~/OUT1015_Participant_Foundation_v6.zip https://github.com/SaurabhOCI/aiworld-2026-zero-trust-labs/raw/main/lab0/OUT1015_Participant_Foundation_v6.zip
    ```
 
-   If the download fails, use the Object Storage link in your activity guide, or upload the zip through the Cloud Shell menu (**Upload**).
+   If GitHub is not reachable, download the same file from Oracle Object Storage (link valid until 1 November 2026):
+
+   ```bash
+   wget -O ~/OUT1015_Participant_Foundation_v6.zip "https://objectstorage.us-ashburn-1.oraclecloud.com/p/7-3XsOEt1Q48HA2iREfVy1ZpHN94urCBIaySLK6lMScVxL36NTdpqJZ4hdCYCJc9/n/intoraclerohit/b/out1015-aiworld-2026-labs/o/lab0/OUT1015_Participant_Foundation_v6.zip"
+   ```
+
+   If both downloads fail, ask your instructor for the zip and upload it through the Cloud Shell menu (**Upload**). Either way, `unzip -l ~/OUT1015_Participant_Foundation_v6.zip | tail -1` must show `16 files`.
 3. Extract it once, then prepare:
 
    ```bash

@@ -24,6 +24,12 @@ cd ~/out1015-lab
 python3 lab.py prepare
 ```
 
+If GitHub is not reachable from Cloud Shell, use the Oracle Object Storage copy of the same file in the first command (link valid until 1 November 2026):
+
+```text
+https://objectstorage.us-ashburn-1.oraclecloud.com/p/7-3XsOEt1Q48HA2iREfVy1ZpHN94urCBIaySLK6lMScVxL36NTdpqJZ4hdCYCJc9/n/intoraclerohit/b/out1015-aiworld-2026-labs/o/lab0/OUT1015_Participant_Foundation_v6.zip
+```
+
 Then follow [Lab 0](lab0/README.md) to plan, deploy and check the environment.
 
 ## Clean up
