@@ -35,3 +35,7 @@ Then follow [Lab 0](lab0/README.md) to plan, deploy and check the environment.
 ## Clean up
 
 After the workshop, follow the clean-up steps in [Lab 0](lab0/README.md#clean-up-after-the-workshop). The lab resources incur charges while they exist.
+
+## After the workshop: self-paced labs
+
+The instructor demonstrations can be repeated in your own OCI tenancy. See [self-paced/](self-paced/README.md) for the packages and activity guides.
