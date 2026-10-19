@@ -1,6 +1,6 @@
-# OUT1015 Zero Trust Security with OCI — Lab 0 setup package
+# OUT1015 Zero Trust Security with OCI — Practice 0 setup package
 
-This package builds the Summit Retail environment that the hands-on labs use. You run it once, in your own Cloud Shell, at the start of the workshop. It takes about 20 minutes, most of it waiting for the servers to finish setting up.
+This package builds the Summit Retail environment that the hands-on practices use. You run it once, in your own Cloud Shell, at the start of the workshop. It takes about 20 minutes, most of it waiting for the servers to finish setting up.
 
 ## What it creates in your compartment
 
@@ -8,10 +8,10 @@ This package builds the Summit Retail environment that the hands-on labs use. Yo
 |---|---|
 | Core VCN (10.42.0.0/16) with a public and a private subnet, internet, NAT and service gateways | Labs 1 and 2 |
 | Tools VM in the public subnet, with the OCI CLI and Python SDK installed | Labs 1 and 2 |
-| Order application VM in the private subnet, with no public IP address | Lab 2 |
-| Public load balancer that sends customer traffic to the order application | Lab 2 |
-| OCI Bastion for SSH sessions to the private VM | Lab 2 |
-| Separate VCN (10.44.0.0/16) with a catalogue web server and its own public load balancer | Lab 3 |
+| Order application VM in the private subnet, with no public IP address | Practice 2 |
+| Public load balancer that sends customer traffic to the order application | Practice 2 |
+| OCI Bastion for SSH sessions to the private VM | Practice 2 |
+| Separate VCN (10.44.0.0/16) with a catalogue web server and its own public load balancer | Practice 3 |
 
 That is 48 resources in total: 3 VMs (Arm A1, 1 OCPU and 6 GB each), 2 load balancers (10 Mbps) and 2 VCNs. Every name starts with `out1015-userNN`, where `userNN` is your participant number. The package creates no IAM policies, vaults, keys, secrets or WAF objects; you create the security controls yourself in the labs.
 
@@ -81,7 +81,7 @@ That is 48 resources in total: 3 VMs (Arm A1, 1 OCPU and 6 GB each), 2 load bala
    Environment ready.
    ```
 
-7. Note the four values at the top. You use them in the labs.
+7. Note the four values at the top. You use them in the practices.
 
 Keep the `~/out1015-lab` folder for the whole workshop. Your SSH private key is `~/out1015-lab/.local/workshop_ssh`. It stays in Cloud Shell; do not share it.
 
@@ -109,8 +109,8 @@ ssh -i ~/out1015-lab/.local/workshop_ssh opc@<tools_public_ip>
 
 ## Clean up after the workshop
 
-1. Delete anything you created by hand in the labs: WAF firewall and policy, logs and log group, Bastion sessions, and any temporary security rules. Schedule deletion of your key and secret in the vault.
-2. Remove the Lab 0 resources:
+1. Delete anything you created by hand in the practices: WAF firewall and policy, logs and log group, Bastion sessions, and any temporary security rules. Schedule deletion of your key and secret in the vault.
+2. Remove the Practice 0 resources:
 
    ```bash
    cd ~/out1015-lab

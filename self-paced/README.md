@@ -1,8 +1,8 @@
-# Self-paced labs: repeat the instructor demonstrations in your own tenancy
+# Self-paced practices: repeat the instructor demonstrations in your own tenancy
 
-During OUT1015 you watched several incidents as instructor demonstrations. After the workshop you can repeat them in your own OCI tenancy. Each lab has a package, which builds the starting state from OCI Cloud Shell and removes it again, and an activity guide.
+During OUT1015 you watched several incidents as instructor demonstrations. After the workshop you can repeat them in your own OCI tenancy. Each practice has a package, which builds the starting state from OCI Cloud Shell and removes it again, and an activity guide.
 
-| Lab | Activity guide | Package | Time | Cost |
+| Practice | Activity guide | Package | Time | Cost |
 |---|---|---|---|---|
 | Incident 1: IAM allow, deny and SSO | [Incident 1: Too Much Access](guides/OUT1015_SelfPaced_IAM_SSO_Activity_Guide.pdf) | `aiw-iam-sso-lab.zip` | about 1 hour | One small VM while the lab runs |
 | ZPR: protect the business path | [Protect the Business Path with Zero Trust Packet Routing](guides/OUT1015_SelfPaced_ZPR_Activity_Guide.pdf) | `aiw-zpr-lab.zip` | about 1 hour 15 minutes | 3 small VMs and a load balancer while the lab runs |

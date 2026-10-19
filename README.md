@@ -1,19 +1,19 @@
-# Zero Trust Security with OCI — hands-on labs
+# Zero Trust Security with OCI — hands-on practices
 
 Participant materials for **OUT1015 Zero Trust Security with OCI** at Oracle AI World 2026.
 
-Summit Retail is moving its order system to Oracle Cloud Infrastructure (OCI). Asha, its cloud security lead, works through a series of security incidents. In the hands-on labs you fix three of them yourself.
+Summit Retail is moving its order system to Oracle Cloud Infrastructure (OCI). Asha, its cloud security lead, works through a series of security incidents. In the hands-on practices you fix three of them yourself.
 
-| Lab | Incident | What you do |
+| Practice | Incident | What you do |
 |---|---|---|
-| [Lab 0](lab0/README.md) | Set up your environment | Deploy the Summit Retail environment from Cloud Shell |
-| Lab 1 | A password in the code | Move a database password into OCI Vault and read it with the instance's own identity |
-| Lab 2 | A private app that isn't private | Use OCI Bastion, find an over-broad network rule, and remove it |
-| Lab 3 | Attacks on an open web port | Inspect, block and rate-limit requests with OCI Web Application Firewall |
+| [Practice 0](lab0/README.md) | Set up your environment | Deploy the Summit Retail environment from Cloud Shell |
+| Practice 1 | A password in the code | Move a database password into OCI Vault and read it with the instance's own identity |
+| Practice 2 | A private app that isn't private | Use OCI Bastion, find an over-broad network rule, and remove it |
+| Practice 3 | Attacks on an open web port | Inspect, block and rate-limit requests with OCI Web Application Firewall |
 
-The activity guides are published on the workshop portal. This repository holds the Lab 0 package and its instructions.
+The activity guides are published on the workshop portal. This repository holds the Practice 0 package and its instructions.
 
-## Quick start (Lab 0)
+## Quick start (Practice 0)
 
 In the OCI Console of your lab account (region **US East (Ashburn)**), open **Cloud Shell** and run:
 
@@ -30,12 +30,12 @@ If GitHub is not reachable from Cloud Shell, use the Oracle Object Storage copy 
 https://objectstorage.us-ashburn-1.oraclecloud.com/p/7-3XsOEt1Q48HA2iREfVy1ZpHN94urCBIaySLK6lMScVxL36NTdpqJZ4hdCYCJc9/n/intoraclerohit/b/out1015-aiworld-2026-labs/o/lab0/OUT1015_Participant_Foundation_v6.zip
 ```
 
-Then follow [Lab 0](lab0/README.md) to plan, deploy and check the environment.
+Then follow [Practice 0](lab0/README.md) to plan, deploy and check the environment.
 
 ## Clean up
 
-After the workshop, follow the clean-up steps in [Lab 0](lab0/README.md#clean-up-after-the-workshop). The lab resources incur charges while they exist.
+After the workshop, follow the clean-up steps in [Practice 0](lab0/README.md#clean-up-after-the-workshop). The lab resources incur charges while they exist.
 
-## After the workshop: self-paced labs
+## After the workshop: self-paced practices
 
 The instructor demonstrations can be repeated in your own OCI tenancy. See [self-paced/](self-paced/README.md) for the packages and activity guides.
