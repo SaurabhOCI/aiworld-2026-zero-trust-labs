@@ -11,7 +11,16 @@ Summit Retail is moving its order system to Oracle Cloud Infrastructure (OCI). A
 | Practice 2 | A private app that isn't private | Use OCI Bastion, find an over-broad network rule, and remove it |
 | Practice 3 | Attacks on an open web port | Inspect, block and rate-limit requests with OCI Web Application Firewall |
 
-The activity guides are published on the workshop portal. A PDF copy of the workshop guide (Practice 0 to 3: environment, Vault, Security Lists/NSGs/Bastion and WAF) is in [guides/OUT1015_Zero_Trust_Labs_Activity_Guide.pdf](guides/OUT1015_Zero_Trust_Labs_Activity_Guide.pdf). This repository also holds the Practice 0 package and its instructions.
+The activity guides are published on the workshop portal. PDF copies, one per practice:
+
+| Practice | Guide |
+|---|---|
+| Practice 0: Prepare your environment | [OUT1015_Practice_0_Prepare_Environment_Activity_Guide.pdf](guides/OUT1015_Practice_0_Prepare_Environment_Activity_Guide.pdf) |
+| Practice 1: OCI Vault secrets | [OUT1015_Practice_1_Vault_Secrets_Activity_Guide.pdf](guides/OUT1015_Practice_1_Vault_Secrets_Activity_Guide.pdf) |
+| Practice 2: Security Lists, NSGs and Bastion | [OUT1015_Practice_2_VCN_Bastion_Activity_Guide.pdf](guides/OUT1015_Practice_2_VCN_Bastion_Activity_Guide.pdf) |
+| Practice 3: Web Application Firewall | [OUT1015_Practice_3_WAF_Activity_Guide.pdf](guides/OUT1015_Practice_3_WAF_Activity_Guide.pdf) |
+
+All four in one document: [OUT1015_Zero_Trust_Labs_Activity_Guide.pdf](guides/OUT1015_Zero_Trust_Labs_Activity_Guide.pdf). This repository also holds the Practice 0 package and its instructions.
 
 ## Quick start (Practice 0)
 
