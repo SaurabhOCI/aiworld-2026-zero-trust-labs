@@ -97,8 +97,8 @@ h2{font-size:17px;margin:18px 0 8px}
       <div class="code"><pre>python3 presenter-demos/ready.py</pre></div>
       <div class="expect">Four lines say READY. If one says CHECK, run that demo's reset (Resets tab), then check again.</div></li>
     <li><div class="do"><span class="who w-m">Mac</span>Start the MCP services, one per terminal (needed for demo 3).</div>
-      <div class="code"><div class="lbl">Terminal 1</div><pre>mcp-order-demo/.local/runtime/bin/python mcp-order-demo/mcp_service.py</pre></div>
-      <div class="code"><div class="lbl">Terminal 2</div><pre>mcp-order-demo/.local/runtime/bin/python mcp-order-demo/rehearsal.py</pre></div></li>
+      <div class="code"><div class="lbl">Terminal 1 · MCP order service</div><pre>cd "/Users/saurabhpatil/Documents/ChatGPT/Oracle AI World Session 2026" && ./mcp-order-demo/.local/runtime/bin/python ./mcp-order-demo/mcp_service.py</pre></div>
+      <div class="code"><div class="lbl">Terminal 2 · order page (rehearsal)</div><pre>cd "/Users/saurabhpatil/Documents/ChatGPT/Oracle AI World Session 2026" && ./mcp-order-demo/.local/runtime/bin/python ./mcp-order-demo/rehearsal.py</pre></div></li>
     <li><div class="do"><span class="who w-i">Browser</span>Two profiles: <b>Instructor</b> (Console, Phoenix) and <b>Asha</b> (Default-domain user <code>asha</code>, Phoenix, <code>prod-app-01</code> page open). Keep private windows for the portal.</div></li>
     <li><div class="do"><span class="who w-i">Console</span>Data Safe: if you stopped the database, start <span class="path">aiw26-incident05-db</span> about 10 minutes before demo 5.</div></li>
   </ol>
@@ -153,6 +153,9 @@ h2{font-size:17px;margin:18px 0 8px}
 <section data-tab="3 MCP">
   <div class="meta"><b>Mac</b> · services started (Before tab) · <b>Test-Domain</b>. Start: Asha has SummitOrderViewer only; SR-1042 Pending, version 1.</div>
   <ol class="steps">
+    <li><div class="do"><span class="who w-m">Mac</span>Start the two services, one per terminal. Leave both running.</div>
+      <div class="code"><div class="lbl">Terminal 1 · MCP order service</div><pre>cd "/Users/saurabhpatil/Documents/ChatGPT/Oracle AI World Session 2026" && ./mcp-order-demo/.local/runtime/bin/python ./mcp-order-demo/mcp_service.py</pre></div>
+      <div class="code"><div class="lbl">Terminal 2 · order page (rehearsal)</div><pre>cd "/Users/saurabhpatil/Documents/ChatGPT/Oracle AI World Session 2026" && ./mcp-order-demo/.local/runtime/bin/python ./mcp-order-demo/rehearsal.py</pre></div></li>
     <li><div class="do"><span class="who w-a">Asha</span>Open the order page (not the preview page).</div>
       <div class="code"><pre>http://127.0.0.1:8891/</pre></div></li>
     <li><div class="do"><span class="who w-a">Asha</span><b>Continue with Oracle SSO</b> as Test-Domain <code>asha</code> › <b>View order</b>.</div>
