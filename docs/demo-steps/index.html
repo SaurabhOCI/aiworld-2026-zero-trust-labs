@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OUT1015 Demo Steps</title>
+<meta name="description" content="Console actions and copy-ready policies for the OUT1015 instructor demos.">
+<meta name="robots" content="noindex">
+<style>
+:root{
+  --bg:#f7f6f3;--panel:#ffffff;--ink:#1d1b18;--quiet:#5f5a52;--line:#e2ddd4;
+  --accent:#b8462f;--accent-ink:#ffffff;--code-bg:#1f2328;--code-ink:#e8e6e1;
+  --ok:#2e7d4f;--ok-bg:#e7f3ec;--who-i:#2f5d8a;--who-a:#8a4b2f;--who-m:#5a4b8a;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16181b;--panel:#1e2125;--ink:#ecebe7;--quiet:#a9a49b;--line:#30343a;
+    --accent:#e0775f;--accent-ink:#16181b;--code-bg:#0f1114;--code-ink:#e8e6e1;
+    --ok:#7cc79a;--ok-bg:#1f2e25;--who-i:#8fb6dc;--who-a:#e0a07f;--who-m:#b3a6e6;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16181b;--panel:#1e2125;--ink:#ecebe7;--quiet:#a9a49b;--line:#30343a;
+  --accent:#e0775f;--accent-ink:#16181b;--code-bg:#0f1114;--code-ink:#e8e6e1;
+  --ok:#7cc79a;--ok-bg:#1f2e25;--who-i:#8fb6dc;--who-a:#e0a07f;--who-m:#b3a6e6;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 16px 0}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h1{font-size:18px;margin:0;flex:1;min-width:180px}
+.tools{display:flex;gap:8px}
+button{font:inherit;cursor:pointer}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:5px 10px;font-size:14px}
+nav{display:flex;gap:4px;overflow-x:auto;padding:10px 0 0;scrollbar-width:thin}
+nav button{border:1px solid var(--line);border-bottom:none;background:transparent;color:var(--quiet);border-radius:8px 8px 0 0;padding:7px 12px;white-space:nowrap;font-size:14px}
+nav button[aria-selected="true"]{background:var(--panel);color:var(--ink);font-weight:600;border-color:var(--line)}
+main{max-width:860px;margin:0 auto;padding:16px}
+section{display:none}
+section.on{display:block}
+.meta{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin-bottom:14px;color:var(--quiet);font-size:15px}
+.meta b{color:var(--ink)}
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+ol.steps>li{counter-increment:s;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px 12px 52px;margin-bottom:10px;position:relative}
+ol.steps>li::before{content:counter(s);position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+ol.steps>li.done{opacity:.55}
+ol.steps>li.done::before{content:"✓";background:var(--ok)}
+.tick{position:absolute;right:12px;top:10px;width:22px;height:22px;accent-color:var(--ok);cursor:pointer}
+.who{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:1px 8px;margin-right:6px;vertical-align:2px}
+.w-i{color:var(--who-i)}.w-a{color:var(--who-a)}.w-m{color:var(--who-m)}
+.do{padding-right:28px}
+.path{font-weight:600}
+.expect{margin-top:8px;background:var(--ok-bg);color:var(--ink);border-left:3px solid var(--ok);border-radius:6px;padding:6px 10px;font-size:15px}
+.say{margin-top:6px;color:var(--quiet);font-style:italic;font-size:15px}
+.code{position:relative;margin-top:8px}
+.code pre{margin:0;background:var(--code-bg);color:var(--code-ink);border-radius:8px;padding:10px 74px 10px 12px;font:14px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word}
+.code .lbl{font-size:12px;color:var(--quiet);margin-bottom:3px;font-weight:600}
+.copy{position:absolute;right:6px;bottom:6px;border:none;border-radius:6px;padding:4px 10px;background:var(--accent);color:var(--accent-ink);font-size:13px;font-weight:600}
+.copy.ok{background:var(--ok)}
+table{border-collapse:collapse;width:100%;margin-top:8px;font-size:15px}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:var(--bg)}
+td code,p code,li code,.do code{font:14px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:0 4px}
+.vals{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}
+.vals label{font-size:14px;color:var(--quiet)}
+.vals input{width:100%;font:15px ui-monospace,Menlo,Consolas,monospace;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.note{font-size:14px;color:var(--quiet);margin:4px 0 0}
+h2{font-size:17px;margin:18px 0 8px}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <h1>OUT1015 · Demo steps</h1>
+    <div class="tools">
+      <button class="btn" id="clear" title="Untick every step on this tab">Clear ticks</button>
+      <button class="btn" id="theme" title="Switch light or dark">Theme</button>
+    </div>
+  </div>
+  <nav role="tablist" id="tabs"></nav>
+</header>
+<main>
+
+<!-- ============================================================ BEFORE -->
+<section data-tab="Before">
+  <div class="meta">Run in your project folder on the Mac. The ready check only reads; it changes nothing.</div>
+  <h2>Your values</h2>
+  <div class="meta">
+    These fill the commands on the other tabs. They stay in this browser only.
+    <div class="vals">
+      <div><label for="v-portal">Summit portal address (SSO demo)</label><input id="v-portal" data-var="PORTAL" placeholder="https://<portal-ip>"></div>
+      <div><label for="v-lb">ZPR load balancer address (ZPR demo)</label><input id="v-lb" data-var="LB" placeholder="<lb-ip>"></div>
+    </div>
+  </div>
+  <ol class="steps">
+    <li><div class="do"><span class="who w-m">Mac</span>Ready check, the day before and 30 minutes before you start.</div>
+      <div class="code"><pre>python3 presenter-demos/ready.py</pre></div>
+      <div class="expect">Four lines say READY. If one says CHECK, run that demo's reset (Resets tab), then check again.</div></li>
+    <li><div class="do"><span class="who w-m">Mac</span>Start the MCP services, one per terminal (needed for demo 3).</div>
+      <div class="code"><div class="lbl">Terminal 1</div><pre>mcp-order-demo/.local/runtime/bin/python mcp-order-demo/mcp_service.py</pre></div>
+      <div class="code"><div class="lbl">Terminal 2</div><pre>mcp-order-demo/.local/runtime/bin/python mcp-order-demo/rehearsal.py</pre></div></li>
+    <li><div class="do"><span class="who w-i">Browser</span>Two profiles: <b>Instructor</b> (Console, Phoenix) and <b>Asha</b> (Default-domain user <code>asha</code>, Phoenix, <code>prod-app-01</code> page open). Keep private windows for the portal.</div></li>
+    <li><div class="do"><span class="who w-i">Console</span>Data Safe: if you stopped the database, start <span class="path">aiw26-incident05-db</span> about 10 minutes before demo 5.</div></li>
+  </ol>
+</section>
+
+<!-- ============================================================ IAM -->
+<section data-tab="1 IAM">
+  <div class="meta"><b>Phoenix</b> · compartment <b>AIWorld-Security-Demo</b> · VM <code>prod-app-01</code> in <b>SummitDemo</b>. Start: VM Running; only <code>Incident01-TemporarySupport-Use</code> exists.</div>
+  <ol class="steps">
+    <li><div class="do"><span class="who w-i">Instructor</span><span class="path">Identity &amp; Security › Policies</span>, compartment <b>AIWorld-Security-Demo</b> › <b>Create Policy</b> › <b>Show manual editor</b>.</div>
+      <div class="code"><div class="lbl">Name</div><pre>Incident01-DevTeam-Read</pre></div>
+      <div class="code"><div class="lbl">Description</div><pre>Incident 1: DevTeam can view instances in SummitDemo</pre></div>
+      <div class="code"><div class="lbl">Statement</div><pre>allow group Default/DevTeam to read instances in compartment SummitDemo</pre></div>
+      <div class="say">"DevTeam can read instances in SummitDemo. What does this allow?"</div></li>
+    <li><div class="do"><span class="who w-a">Asha</span>Refresh <code>prod-app-01</code>, click <b>Stop</b> (leave force stop unticked), confirm.</div>
+      <div class="expect">Stopping, then Stopped.</div>
+      <div class="say">"A read policy, but the stop worked. What else applies?"</div></li>
+    <li><div class="do"><span class="who w-i">Instructor</span><span class="path">Identity &amp; Security › Domains › Default › User management › asha › Groups</span>. Then <span class="path">Policies</span> › <code>Incident01-TemporarySupport-Use</code>.</div>
+      <div class="expect">Groups: DevTeam and TemporarySupport. Statement: <code>allow group Default/TemporarySupport to use instances in compartment SummitDemo</code></div>
+      <div class="say">"Allows add up across groups. use instances includes start, stop and reboot."</div></li>
+    <li><div class="do"><span class="who w-i">Instructor</span>Open <code>prod-app-01</code> › <b>Start</b>. Wait for <b>Running</b>.</div></li>
+    <li><div class="do"><span class="who w-i">Instructor</span><span class="path">Policies</span>, compartment <b>AIWorld-Security-Demo</b> › <b>Create Policy</b> › <b>Show manual editor</b>.</div>
+      <div class="code"><div class="lbl">Name</div><pre>Incident01-Deny-Power</pre></div>
+      <div class="code"><div class="lbl">Description</div><pre>Incident 1: block instance power actions for DevTeam in SummitDemo</pre></div>
+      <div class="code"><div class="lbl">Statement</div><pre>deny group Default/DevTeam to {INSTANCE_POWER_ACTIONS} in compartment SummitDemo</pre></div>
+      <div class="say">"An explicit deny wins over any allow, for exactly the permissions it names."</div></li>
+    <li><div class="do"><span class="who w-a">Asha</span>Wait 30–60 s. Refresh <code>prod-app-01</code>, click <b>Stop</b>, confirm.</div>
+      <div class="expect">She still sees the VM, Running. The stop is refused (in rehearsal: "You don't have permission to view these resources in this compartment"). Instructor view: still Running.</div>
+      <div class="say">"Same Asha, same VM. Only the permission decision changed. The deny is the guard rail against the next forgotten grant."</div></li>
+  </ol>
+</section>
+
+<!-- ============================================================ SSO -->
+<section data-tab="2 SSO">
+  <div class="meta"><b>Test-Domain</b> · group <code>SummitPortalUsers</code> already has the portal app. Start: Test-Domain <code>asha</code> is not in the group. Always use a fresh private window.</div>
+  <ol class="steps">
+    <li><div class="do"><span class="who w-a">Asha</span>Open the portal login page.</div>
+      <div class="code"><pre>{{PORTAL}}</pre></div>
+      <div class="say">"Every app with its own passwords is another account to manage."</div></li>
+    <li><div class="do"><span class="who w-a">Asha</span>Fresh private window › <b>Continue with Oracle SSO</b> › sign in as Test-Domain <code>asha</code>.</div>
+      <div class="expect">Password accepted, access to the portal refused.</div>
+      <div class="say">"Having an identity doesn't mean access to every app."</div></li>
+    <li><div class="do"><span class="who w-i">Instructor</span><span class="path">Identity &amp; Security › Domains › Test-Domain › User management › Groups › SummitPortalUsers</span> › add user <code>asha</code>.</div></li>
+    <li><div class="do"><span class="who w-a">Asha</span>Close <b>every</b> private window. New private window › portal › <b>Continue with Oracle SSO</b> › sign in.</div>
+      <div class="expect">Portal opens as Asha. <b>My account</b> shows Oracle SSO as the account manager.</div>
+      <div class="say">"No portal password. A group change granted access, and the same change removes it."</div></li>
+  </ol>
+  <p class="note">Doing MCP next? Keep Asha in the group.</p>
+</section>
+
+<!-- ============================================================ MCP -->
+<section data-tab="3 MCP">
+  <div class="meta"><b>Mac</b> · services started (Before tab) · <b>Test-Domain</b>. Start: Asha has SummitOrderViewer only; SR-1042 Pending, version 1.</div>
+  <ol class="steps">
+    <li><div class="do"><span class="who w-a">Asha</span>Open the order page (not the preview page).</div>
+      <div class="code"><pre>http://127.0.0.1:8891/</pre></div></li>
+    <li><div class="do"><span class="who w-a">Asha</span><b>Continue with Oracle SSO</b> as Test-Domain <code>asha</code> › <b>View order</b>.</div>
+      <div class="expect">SR-1042 · Everyday Backpack · Pending · version 1. Panel: SummitOrderViewer, ORDER_VIEWED.</div></li>
+    <li><div class="do"><span class="who w-a">Asha</span><b>Cancel order</b> › <b>Confirm cancellation</b>.</div>
+      <div class="expect">"Cancellation not permitted." Panel: ORDER_PERMISSION_DENIED, Order changed: No.</div>
+      <div class="say">"She can see the tool and call it. The server still checks her role on every call."</div></li>
+    <li><div class="do"><span class="who w-i">Instructor</span><i>(12-minute version)</i> <span class="path">Test-Domain › Integrated applications › Summit Orders MCP Resource › Application roles › SummitOrderCanceller › ⋮ › Manage users › Assign users</span> › <code>asha</code> › Assign.</div>
+      <div class="say">"The admin changes the grant centrally, not the code."</div></li>
+    <li><div class="do"><span class="who w-a">Asha</span><b>Reconnect order tools</b> (sign in if asked) › <b>Cancel order</b> › <b>Confirm</b>.</div>
+      <div class="expect">Cancelled, version 2. ORDER_CANCELLED.</div>
+      <div class="say">"Same Asha, same tool, a new token carrying the new role. Tokens last 5 minutes, so removal also takes effect within minutes."</div></li>
+  </ol>
+  <p class="note">Denial doesn't appear (sign-in, expiry or scope error)? Reconnect order tools and try again. Don't call a different error a denial.</p>
+</section>
+
+<!-- ============================================================ ZPR -->
+<section data-tab="4 ZPR">
+  <div class="meta">Resources in <b>Chicago</b>, compartment <b>SummitZPRDemo</b> · ZPR policy in <b>Phoenix</b> (home) · namespace <code>aiw26zpr2026</code>. Start: no labels, no business policy.</div>
+  <ol class="steps">
+    <li><div class="do"><span class="who w-a">Browser</span>Customer query (after the architecture slide).</div>
+      <div class="code"><pre>http://{{LB}}/dbcheck</pre></div>
+      <div class="expect">DB connection successful, three products.</div></li>
+    <li><div class="do"><span class="who w-i">Chicago</span><span class="path">Networking › Virtual cloud networks</span> › <code>aiw26-zpr-backend-vcn</code> › <b>Security</b> › <b>Network security groups</b> › <code>aiw26-zpr-db-nsg</code>.</div>
+      <div class="expect">Ingress TCP 1521 from <code>10.86.0.0/16</code>.</div></li>
+    <li><div class="do"><span class="who w-m">Mac</span>In the <code>zpr-demo/lab</code> folder: Test VM to the database port.</div>
+      <div class="code"><pre>ssh -F .local/ssh_config test /usr/local/bin/check-database</pre></div>
+      <div class="expect">DATABASE PORT REACHABLE</div>
+      <div class="say">"The range we opened for the app also covers the Test VM."</div></li>
+    <li><div class="do"><span class="who w-i">Instructor</span>Say the intent first: customers use the website; the app reaches the database; the Test VM doesn't.</div></li>
+    <li><div class="do"><span class="who w-i">Phoenix</span><span class="path">Identity &amp; Security › Zero Trust Packet Routing › Policies › Create policy</span> › <b>Add policy statements</b> › <b>Manual policy builder</b>.</div>
+      <div class="code"><div class="lbl">Name</div><pre>aiw26-zpr-business-path</pre></div>
+      <div class="code"><div class="lbl">Description</div><pre>SummitZPRDemo only: customer -> LB -> application -> database</pre></div>
+      <div class="code"><div class="lbl">All three statements</div><pre>in aiw26zpr2026.networks:frontend VCN allow '0.0.0.0/0' to connect to aiw26zpr2026.role:loadbalancer endpoints with protocol='tcp/80'
+in aiw26zpr2026.networks:frontend VCN allow aiw26zpr2026.role:loadbalancer endpoints to connect to aiw26zpr2026.role:application endpoints with protocol='tcp/80'
+allow aiw26zpr2026.role:application endpoints in aiw26zpr2026.networks:frontend VCN to connect to aiw26zpr2026.role:database endpoints with protocol='tcp/1521' in aiw26zpr2026.networks:backend VCN</pre></div>
+      <div class="code"><div class="lbl">1 · Internet → LB on 80</div><pre>in aiw26zpr2026.networks:frontend VCN allow '0.0.0.0/0' to connect to aiw26zpr2026.role:loadbalancer endpoints with protocol='tcp/80'</pre></div>
+      <div class="code"><div class="lbl">2 · LB → app on 80</div><pre>in aiw26zpr2026.networks:frontend VCN allow aiw26zpr2026.role:loadbalancer endpoints to connect to aiw26zpr2026.role:application endpoints with protocol='tcp/80'</pre></div>
+      <div class="code"><div class="lbl">3 · App → database on 1521</div><pre>allow aiw26zpr2026.role:application endpoints in aiw26zpr2026.networks:frontend VCN to connect to aiw26zpr2026.role:database endpoints with protocol='tcp/1521' in aiw26zpr2026.networks:backend VCN</pre></div>
+      <div class="expect">Add › Create policy › wait for <b>Active</b>.</div>
+      <div class="say">Read each as "who may talk to whom, on which port". No line for the Test VM on 1521.</div></li>
+    <li><div class="do"><span class="who w-i">Chicago</span>On each resource: <b>Security</b> tab › <b>Security attributes</b> › <b>Add</b> · namespace <code>aiw26zpr2026</code> · mode <b>Enforce</b>.</div>
+      <table>
+        <tr><th>Resource</th><th>Where</th><th>Attribute</th><th>Value</th></tr>
+        <tr><td><code>aiw26-zpr-frontend-vcn</code></td><td>Virtual cloud networks</td><td>networks</td><td>frontend</td></tr>
+        <tr><td><code>aiw26-zpr-backend-vcn</code></td><td>Virtual cloud networks</td><td>networks</td><td>backend</td></tr>
+        <tr><td><code>aiw26-zpr-lb</code></td><td>Load balancers</td><td>role</td><td>loadbalancer</td></tr>
+        <tr><td><code>aiw26-zpr-app</code></td><td>Instances</td><td>role</td><td>application</td></tr>
+        <tr><td><code>aiw26-zpr-db</code></td><td>Instances</td><td>role</td><td>database</td></tr>
+        <tr><td><code>aiw26-zpr-test</code></td><td>Instances</td><td>role</td><td>test</td></tr>
+      </table>
+      <div class="say">"Labels describe the resources; the policy says which labels may talk." Wait 2–3 minutes after the last label.</div></li>
+    <li><div class="do"><span class="who w-a">Browser</span> + <span class="who w-m">Mac</span>Repeat both tests.</div>
+      <div class="code"><pre>http://{{LB}}/dbcheck</pre></div>
+      <div class="code"><pre>ssh -F .local/ssh_config test /usr/local/bin/check-database</pre></div>
+      <div class="expect">Query still works. Test VM: DATABASE PORT BLOCKED: timeout. (Rehearsal: the first check right after labelling can still say REACHABLE; a minute later it's blocked.)</div>
+      <div class="say">"Same addresses, same NSG rule. Only the app matches the intent."</div></li>
+  </ol>
+</section>
+
+<!-- ============================================================ DATA SAFE -->
+<section data-tab="5 Data Safe">
+  <div class="meta"><b>Phoenix</b> · compartment <b>Incident05DataSafeDemo</b> · DB <code>aiw26-incident05-db</code> · target <code>aiw26-incident05-target</code>. Start: test copy unmasked; tester has the extra source grant.</div>
+  <ol class="steps">
+    <li><div class="do"><span class="who w-i">ADMIN</span><code>aiw26-incident05-db</code> › <b>Database actions</b> › <b>SQL</b>.</div>
+      <div class="code"><div class="lbl">Test identities</div><pre>select customer_id, first_name, last_name, email, phone_number, city
+from SUMMIT_TEST.CUSTOMERS
+where customer_id &lt;= 3
+order by customer_id;</pre></div>
+      <div class="code"><div class="lbl">Orders still join</div><pre>select count(*) as joined_orders,
+       sum(o.quantity * o.unit_price) as order_total
+from SUMMIT_TEST.ORDERS o
+join SUMMIT_TEST.CUSTOMERS c on c.customer_id = o.customer_id;</pre></div>
+      <div class="expect">Three rows with real-looking names, emails, phones (Asha Rao, asha.rao@example.com, 202-555-0101). Orders: 18 and 2200.</div></li>
+    <li><div class="do"><span class="who w-i">Data Safe</span><span class="path">Oracle Database › Data Safe › Data discovery › Sensitive data models</span>, compartment <b>Incident05DataSafeDemo</b>, target <code>aiw26-incident05-target</code>. Limit to <code>SUMMIT_TEST.CUSTOMERS</code> and <code>SUMMIT_TEST.ORDERS</code>.</div>
+      <div class="code"><div class="lbl">Model name</div><pre>aiw26-incident05-sensitive-data</pre></div>
+      <div class="expect">FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER (sometimes CITY too; keep CITY).</div>
+      <div class="say">"Find it before you protect it."</div></li>
+    <li><div class="do"><span class="who w-i">Data Safe</span><span class="path">Security center › User assessment</span> for the target, filter <code>SUMMIT_TESTER</code>. Then in SQL <b>as SUMMIT_TESTER</b>:</div>
+      <div class="code"><pre>select count(*) from SUMMIT_SOURCE.CUSTOMERS;</pre></div>
+      <div class="expect">Returns 12. Low risk in the assessment, but it can still read the source.</div></li>
+    <li><div class="do"><span class="who w-i">Data Safe</span>From the model: <b>Actions › Create masking policy</b>. Then for each column: <b>⋯ › View/Edit masking format</b>; finish with <b>Actions › Save Masking Formats</b>.</div>
+      <div class="code"><div class="lbl">Policy name</div><pre>aiw26-incident05-mask-test-copy</pre></div>
+      <table>
+        <tr><th>Column</th><th>Format</th></tr>
+        <tr><td>FIRST_NAME</td><td>Random String, length 8 to 8</td></tr>
+        <tr><td>LAST_NAME</td><td>Random String, length 8 to 8</td></tr>
+        <tr><td>EMAIL</td><td>Random String 10 to 10, then <b>Add format entry</b>: Fixed String <code>@example.com</code></td></tr>
+        <tr><td>PHONE_NUMBER</td><td>Fixed String <code>202-555-01</code>, then <b>Add format entry</b>: Random Number 50 to 99</td></tr>
+      </table>
+      <div class="code"><div class="lbl">Fixed string · EMAIL</div><pre>@example.com</pre></div>
+      <div class="code"><div class="lbl">Fixed string · PHONE_NUMBER</div><pre>202-555-01</pre></div></li>
+    <li><div class="do"><span class="who w-i">Data Safe</span><b>Pre-masking check</b> (target + policy) › then from the policy: <b>Mask data</b> › target <code>aiw26-incident05-target</code> › <b>Mask Data</b>.</div>
+      <div class="expect">Job succeeds: 4 columns, 48 values masked.</div></li>
+    <li><div class="do"><span class="who w-i">ADMIN</span>Run the two queries from step 1 again, then remove the extra grant:</div>
+      <div class="code"><pre>REVOKE SELECT ON SUMMIT_SOURCE.CUSTOMERS FROM SUMMIT_TESTER;</pre></div>
+      <div class="do" style="margin-top:8px"><span class="who w-i">TESTER</span>Reconnect as SUMMIT_TESTER and run the source query again:</div>
+      <div class="code"><pre>select count(*) from SUMMIT_SOURCE.CUSTOMERS;</pre></div>
+      <div class="expect">Identities replaced; still 18 orders and 2200; source unchanged. Tester gets ORA-00942 on the source. (A login or network error is not the proof.)</div>
+      <div class="say">"Discovery, masking and least privilege solve different parts of the problem."</div></li>
+  </ol>
+</section>
+
+<!-- ============================================================ RESETS -->
+<section data-tab="Resets">
+  <div class="meta">Run from the project folder on the Mac, after rehearsals. Then run the ready check again.</div>
+  <ol class="steps">
+    <li><div class="do"><span class="who w-m">Mac</span>Incident 1 + SSO: preview, then apply. Removes the read and deny policies and Asha's SSO membership; starts the VM if needed.</div>
+      <div class="code"><pre>python3 incident-01/reset-demo.py</pre></div>
+      <div class="code"><pre>python3 incident-01/reset-demo.py --apply</pre></div></li>
+    <li><div class="do"><span class="who w-i">Console</span>MCP: remove Asha's <b>SummitOrderCanceller</b> assignment (same path as demo 3, step 4). Then restore SR-1042 with the scoped reset in <code>mcp-order-demo/SETUP_AND_RESET.md</code>. Sign out.</div></li>
+    <li><div class="do"><span class="who w-m">Mac</span>ZPR: removes the six labels and the business policy.</div>
+      <div class="code"><pre>python3 zpr-demo/lab/zpr_state.py reset</pre></div>
+      <div class="code"><pre>python3 zpr-demo/lab/zpr_state.py status</pre></div></li>
+    <li><div class="do"><span class="who w-m">Mac</span>Data Safe: removes the model, policy and reports; restores the unmasked copy and the tester's grant.</div>
+      <div class="code"><pre>python3 incident-05/demo_env.py reset</pre></div></li>
+    <li><div class="do"><span class="who w-m">Mac</span>Check everything is back at the start.</div>
+      <div class="code"><pre>python3 presenter-demos/ready.py</pre></div></li>
+  </ol>
+</section>
+
+</main>
+<script>
+(function(){
+  var store={get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+  // theme
+  var saved=store.get('out1015-theme'); if(saved) document.documentElement.setAttribute('data-theme',saved);
+  document.getElementById('theme').onclick=function(){
+    var cur=document.documentElement.getAttribute('data-theme');
+    var dark=cur?cur==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var next=dark?'light':'dark'; document.documentElement.setAttribute('data-theme',next); store.set('out1015-theme',next);
+  };
+  // tabs
+  var secs=[].slice.call(document.querySelectorAll('section')), nav=document.getElementById('tabs');
+  secs.forEach(function(s,i){
+    var b=document.createElement('button'); b.textContent=s.dataset.tab; b.setAttribute('role','tab');
+    b.onclick=function(){show(i)}; nav.appendChild(b);
+  });
+  function show(i){
+    secs.forEach(function(s,j){s.classList.toggle('on',i===j); nav.children[j].setAttribute('aria-selected',i===j)});
+    store.set('out1015-tab',String(i)); window.scrollTo(0,0);
+  }
+  var t=parseInt(store.get('out1015-tab')||'0',10); show(isNaN(t)||t>=secs.length?0:t);
+  // variables
+  var pres=[].slice.call(document.querySelectorAll('pre'));
+  pres.forEach(function(p){p.dataset.tpl=p.textContent});
+  var inputs=[].slice.call(document.querySelectorAll('input[data-var]'));
+  function fill(){
+    var v={}; inputs.forEach(function(i){v[i.dataset.var]=i.value.trim().replace(/\/+$/,'')});
+    pres.forEach(function(p){p.textContent=p.dataset.tpl.replace(/\{\{(\w+)\}\}/g,function(m,k){return v[k]||('<'+k.toLowerCase()+'>')})});
+  }
+  inputs.forEach(function(i){var s=store.get('out1015-'+i.dataset.var); if(s) i.value=s; i.oninput=function(){store.set('out1015-'+i.dataset.var,i.value); fill()}});
+  fill();
+  // copy buttons
+  document.querySelectorAll('.code').forEach(function(c){
+    var b=document.createElement('button'); b.className='copy'; b.textContent='Copy'; c.appendChild(b);
+    b.onclick=function(){
+      var txt=c.querySelector('pre').textContent;
+      function ok(){b.textContent='Copied'; b.classList.add('ok'); setTimeout(function(){b.textContent='Copy'; b.classList.remove('ok')},1200)}
+      if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(ok,fallback)} else fallback();
+      function fallback(){var ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); ok()}catch(e){} document.body.removeChild(ta)}
+    };
+  });
+  // ticks
+  document.querySelectorAll('section').forEach(function(s,si){
+    s.querySelectorAll('ol.steps>li').forEach(function(li,i){
+      var key='out1015-tick-'+si+'-'+i, cb=document.createElement('input');
+      cb.type='checkbox'; cb.className='tick'; cb.title='Done'; cb.checked=store.get(key)==='1'; li.classList.toggle('done',cb.checked);
+      cb.onchange=function(){li.classList.toggle('done',cb.checked); store.set(key,cb.checked?'1':'0')};
+      li.appendChild(cb);
+    });
+  });
+  document.getElementById('clear').onclick=function(){
+    var s=document.querySelector('section.on');
+    s.querySelectorAll('.tick').forEach(function(cb){if(cb.checked){cb.checked=false; cb.onchange()}});
+  };
+})();
+</script>
+</body>
+</html>
