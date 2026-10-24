@@ -258,6 +258,52 @@ details.hook[open]>summary .hb::after{content:"Hide"}
 <!-- ============================================================ ZPR -->
 <section data-tab="4 ZPR">
   <div class="meta">Resources in <b>Chicago</b>, compartment <b>SummitZPRDemo</b> · ZPR policy in <b>Phoenix</b> (home) · namespace <code>aiw26zpr2026</code>. Start: no labels, no business policy.</div>
+  <details class="hook" id="hook-zpr">
+    <summary>Opening hook · about 2 minutes<span class="hb"></span></summary>
+    <div class="hook-body">
+      <h3>1 · Show of hands</h3>
+      <p class="line">"Who has opened a firewall rule for 'the app subnet', and later found something else living in that subnet?"</p>
+      <p class="cue">Knowing laughs. Pause.</p>
+
+      <h3>2 · Real-world example</h3>
+      <p class="line">"In 2013, a large US retailer was breached. The attackers didn't break in through the front door. They used access stolen from a heating and air-conditioning contractor, then moved across the network until they reached the payment systems. Tens of millions of cards."</p>
+      <p class="line">"The network allowed it, because the network only knew addresses. It didn't know that a contractor's system had no business talking to checkout."</p>
+
+      <h3>3 · Summit Retail (architecture slide)</h3>
+      <p class="line">"Summit Retail's path is simple: customer, load balancer, application, database. The app must reach the database on port 1521."</p>
+      <p class="line">"So the team opened 1521 to the front-end network, 10.86.0.0/16. And the Test VM lives in that same network."</p>
+      <p class="line"><b>"Addresses describe where something sits, not what it is."</b></p>
+      <p class="cue">Then step 1 (customer query) and steps 2–3: show the NSG rule and REACHABLE.</p>
+
+      <h3>4 · The question before the policy (step 4)</h3>
+      <p class="line"><b>"How do we say 'only the application may talk to the database', in a way that survives new VMs, changed IPs and the next quick fix?"</b></p>
+      <p class="cue">Two-second pause.</p>
+      <p class="line">"We stop writing addresses, and write the intent."</p>
+
+      <h3>5 · At the policy (step 5)</h3>
+      <p class="line">"Read it like a sentence: the internet may reach the load balancer; the load balancer may reach the app; the app may reach the database on 1521. That's the whole business path. There is no line for the Test VM."</p>
+
+      <h3>6 · At the labels (step 6)</h3>
+      <p class="line">"Labels say what each resource is. The policy says which labels may talk. Once the database carries a label, nothing reaches it unless a statement allows it."</p>
+
+      <h3>7 · At the block (step 7)</h3>
+      <p class="line">"Same addresses. Same NSG rule. Same routes. The Test VM is still in the same network. It just isn't the application."</p>
+
+      <h3>Close</h3>
+      <p class="line"><b>"NSGs say which ports are open. ZPR says who may talk to whom. Network Firewall checks what they say. You need all three."</b></p>
+
+      <h3>If they ask</h3>
+      <p><b>Why still NSGs?</b> Both must allow. NSGs cover unlabelled resources and give defence in depth.</p>
+      <p><b>Why buy Network Firewall?</b> ZPR doesn't inspect content: no threat signatures, URL filtering or TLS inspection.</p>
+      <p><b>Unlabelled Test VM?</b> Still blocked. The database's label protects it. We label the Test VM so the intent is explicit.</p>
+      <p><b>Does it filter the internet?</b> Don't claim it. The demo proves separation between private workloads across the DRG.</p>
+      <p><b>How fast?</b> Labels take a minute or two. The first check right after labelling may still say REACHABLE.</p>
+
+      <h3>Short version (20 seconds)</h3>
+      <p class="line">"We opened the database to a network range, and something that isn't the app lives in that range. Let's stop writing addresses and write the intent: only the app talks to the database."</p>
+      <p class="cue">Say "a large US retailer" and "a heating and air-conditioning contractor". Don't name the company or add details.</p>
+    </div>
+  </details>
   <ol class="steps">
     <li><div class="do"><span class="who w-a">Browser</span>Customer query (after the architecture slide).</div>
       <div class="code"><pre>http://{{LB}}/dbcheck</pre></div>
