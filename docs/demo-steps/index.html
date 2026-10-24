@@ -145,6 +145,48 @@ details.hook[open]>summary .hb::after{content:"Hide"}
 <!-- ============================================================ SSO -->
 <section data-tab="2 SSO">
   <div class="meta"><b>Test-Domain</b> · group <code>SummitPortalUsers</code> already has the portal app. Start: Test-Domain <code>asha</code> is not in the group. Always use a fresh private window.</div>
+  <details class="hook" id="hook-sso">
+    <summary>Opening hook · about 2 minutes<span class="hb"></span></summary>
+    <div class="hook-body">
+      <h3>1 · Hook (no screen)</h3>
+      <p class="line">"How many passwords does your support team have, one per app? When someone leaves, who removes all of them?"</p>
+      <p class="cue">Wait for nods.</p>
+      <p class="line">"Summit Retail has a new support portal. Asha needs it. Let's not give her another password."</p>
+
+      <h3>2 · Draw it (whiteboard)</h3>
+      <p class="cue">Asha → Summit Portal (no passwords) → Test-Domain (who are you?) → Group SummitPortalUsers (may you use this app?)</p>
+      <p class="line">"The portal keeps no passwords. It sends Asha to the identity domain. The domain checks two things: who she is, and whether she's assigned to this app."</p>
+      <p class="cue">Circle the group.</p>
+      <p class="line">"That second check is the one we'll watch."</p>
+
+      <h3>3 · At the refusal (step 2)</h3>
+      <p class="line">"Her password worked. The domain knows exactly who she is. And it still said no."</p>
+      <p class="line"><b>"Why?"</b></p>
+      <p class="cue">Let someone say "she's not assigned".</p>
+      <p class="line">"Having an identity doesn't mean access to every application. That's least privilege at the front door."</p>
+
+      <h3>4 · The fix (step 3)</h3>
+      <p class="line">"I'm not touching the portal. I'm not creating an account. I'm changing one group, in one place."</p>
+
+      <h3>5 · At the welcome page (step 4)</h3>
+      <p class="line">"Account managed by Oracle SSO. There's no portal password to steal, reset or forget."</p>
+      <p class="cue">Draw the reverse arrow on the whiteboard.</p>
+      <p class="line">"When Asha leaves, we remove her from one group, and access is gone from every app tied to it. Earlier a forgotten group let her stop a server. Same lesson: groups are the control."</p>
+
+      <h3>Close</h3>
+      <p class="line"><b>"Signing in proves who you are. The domain decides what you can open. And OCI IAM still decides what you can do to cloud resources. Even signed in to the portal, Asha still can't stop prod-app-01."</b></p>
+
+      <h3>If they ask</h3>
+      <p><b>What refused her?</b> Enforce grants as authorization on the app. Without it, anyone in the domain gets in.</p>
+      <p><b>Why not instant after removal?</b> An old browser session. A fresh private window shows the real decision.</p>
+      <p><b>MFA?</b> A sign-on policy in the domain can require it for this app.</p>
+      <p><b>What does the portal receive?</b> A one-time code its server swaps, with its secret, for tokens. Never the password.</p>
+
+      <h3>Short version (20 seconds)</h3>
+      <p class="line">"Every app with its own password is another account to forget to remove. Watch Asha sign in once, get refused, then get in, because we changed one group, not the app."</p>
+      <p class="cue">She gets in before you add her? Close all private windows, then: "Sessions outlive changes. That's why we keep them short."</p>
+    </div>
+  </details>
   <ol class="steps">
     <li><div class="do"><span class="who w-a">Asha</span>Open the portal login page.</div>
       <div class="code"><pre>{{PORTAL}}</pre></div>
