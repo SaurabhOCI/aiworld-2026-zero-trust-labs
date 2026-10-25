@@ -303,6 +303,49 @@ details.hook[open]>summary .hb::after{content:"Hide"}
       <p class="cue">Say "a large US retailer" and "a heating and air-conditioning contractor". Don't name the company or add details.</p>
     </div>
   </details>
+  <details class="hook" id="hook-zpr-after">
+    <summary>After the block · where ZPR fits<span class="hb"></span></summary>
+    <div class="hook-body">
+      <h3>Bridge (say first)</h3>
+      <p class="line">"What you just saw isn't a lab trick. Anywhere a network range is wider than the business rule, this gap exists. Here's where it shows up."</p>
+      <p class="cue">Pick two or three for the room.</p>
+
+      <h3>1 · Retail and payments</h3>
+      <p><b>Gap:</b> the payment database shares a network with inventory, reporting and vendor tools. A rule "for checkout" opens it to all of them. The 2013 retail breach moved exactly this way.</p>
+      <p class="line">"Only the payment service may reach the cardholder database. Nothing else, whatever subnet it's in."</p>
+      <p class="cue">Card-data rules require proof of segmentation. The ZPR policy reads like that control.</p>
+
+      <h3>2 · Healthcare</h3>
+      <p><b>Gap:</b> analytics VMs, test machines and a vendor's integration server share the network with the patient-records database.</p>
+      <p class="line">"Only the clinical application may reach patient records. Analytics gets de-identified copies, not a network path."</p>
+      <p class="cue">"Who can reach patient data" becomes one readable statement for the auditor.</p>
+
+      <h3>3 · Banking</h3>
+      <p><b>Gap:</b> jump hosts, batch servers and test machines sit in the same VCN as the core banking database.</p>
+      <p class="line">"Only payments may reach the core ledger on its database port. Admin access goes through Bastion, never the network."</p>
+
+      <h3>4 · Autoscaling and containers</h3>
+      <p><b>Gap:</b> a pool scales from 2 to 20 VMs, each with a new IP. Teams give up and open the whole subnet: the Test VM problem, at scale.</p>
+      <p class="line">"Label the pool role:application, and every new instance is covered the moment it starts. No rule to edit."</p>
+      <p class="cue">Strongest argument for labels over addresses.</p>
+
+      <h3>5 · AI applications</h3>
+      <p><b>Gap:</b> notebooks, experiment servers and a test box share the network with the vector database and customer documents.</p>
+      <p class="line">"Only the production AI app may reach the vector database. Experiments get their own copy."</p>
+      <p class="cue">Ties to MCP: IAM decides what the agent may do; ZPR decides what its server may reach.</p>
+
+      <h3>6 · Shared networks and mergers</h3>
+      <p><b>Gap:</b> five teams share one VCN after an acquisition. Nobody dares tighten a rule.</p>
+      <p class="line">"Each team labels its resources; security writes the business paths once. Intent becomes the shared language."</p>
+
+      <h3>Close</h3>
+      <p class="line"><b>"In every one of these, the rule fits in one sentence: only this may talk to that. NSGs can't say it; they only know addresses. ZPR lets you write the sentence, and the network enforces it."</b></p>
+      <p class="line">"NSGs open the ports. ZPR says who may talk to whom. Network Firewall checks what they say."</p>
+
+      <h3>If they ask</h3>
+      <p><b>Does ZPR cover my database service?</b> ZPR supports a specific list of resource types (compute, load balancers, several database services and more). Check Oracle's current list before promising coverage.</p>
+    </div>
+  </details>
   <ol class="steps">
     <li><div class="do"><span class="who w-a">Browser</span>Customer query (after the architecture slide).</div>
       <div class="code"><pre>http://163.192.100.236/dbcheck</pre></div>
