@@ -100,7 +100,6 @@ details.hook[open]>summary .hb::after{content:"Hide"}
     These fill the commands on the other tabs. They stay in this browser only.
     <div class="vals">
       <div><label for="v-portal">Summit portal address (SSO demo)</label><input id="v-portal" data-var="PORTAL" placeholder="https://<portal-ip>"></div>
-      <div><label for="v-lb">ZPR load balancer address (ZPR demo)</label><input id="v-lb" data-var="LB" placeholder="<lb-ip>"></div>
     </div>
   </div>
   <ol class="steps">
@@ -306,7 +305,7 @@ details.hook[open]>summary .hb::after{content:"Hide"}
   </details>
   <ol class="steps">
     <li><div class="do"><span class="who w-a">Browser</span>Customer query (after the architecture slide).</div>
-      <div class="code"><pre>http://{{LB}}/dbcheck</pre></div>
+      <div class="code"><pre>http://163.192.100.236/dbcheck</pre></div>
       <div class="expect">DB connection successful, three products.</div></li>
     <li><div class="do"><span class="who w-i">Chicago</span><span class="path">Networking › Virtual cloud networks</span> › <code>aiw26-zpr-backend-vcn</code> › <b>Security</b> › <b>Network security groups</b> › <code>aiw26-zpr-db-nsg</code>.</div>
       <div class="expect">Ingress TCP 1521 from <code>10.86.0.0/16</code>.</div></li>
@@ -338,7 +337,7 @@ allow aiw26zpr2026.role:application endpoints in aiw26zpr2026.networks:frontend 
       </table>
       <div class="say">"Labels describe the resources; the policy says which labels may talk." Wait 2–3 minutes after the last label.</div></li>
     <li><div class="do"><span class="who w-a">Browser</span> + <span class="who w-m">Mac</span>Repeat both tests.</div>
-      <div class="code"><pre>http://{{LB}}/dbcheck</pre></div>
+      <div class="code"><pre>http://163.192.100.236/dbcheck</pre></div>
       <div class="code"><pre>ssh -F .local/ssh_config test /usr/local/bin/check-database</pre></div>
       <div class="expect">Query still works. Test VM: DATABASE PORT BLOCKED: timeout. (Rehearsal: the first check right after labelling can still say REACHABLE; a minute later it's blocked.)</div>
       <div class="say">"Same addresses, same NSG rule. Only the app matches the intent."</div></li>
