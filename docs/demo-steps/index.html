@@ -442,6 +442,11 @@ allow aiw26zpr2026.role:application endpoints in aiw26zpr2026.networks:frontend 
     </div>
   </details>
   <ol class="steps">
+    <li><div class="do"><span class="who w-i">ADMIN</span><i>(Before the demo)</i> <code>aiw26-incident05-db</code> › <b>Database actions</b> › <b>SQL</b>. Set a SUMMIT_TESTER password you know and unlock the account. Replace the placeholder before you run it.</div>
+      <div class="code"><div class="lbl">Update SUMMIT_TESTER password</div><pre>ALTER USER SUMMIT_TESTER
+IDENTIFIED BY "YourNewStrongPasswordHere"
+ACCOUNT UNLOCK;</pre></div>
+      <div class="expect">User SUMMIT_TESTER altered. You'll sign in as SUMMIT_TESTER in steps 3 and 6.</div></li>
     <li><div class="do"><span class="who w-i">ADMIN</span><code>aiw26-incident05-db</code> › <b>Database actions</b> › <b>SQL</b>.</div>
       <div class="code"><div class="lbl">Test identities</div><pre>select customer_id, first_name, last_name, email, phone_number, city
 from SUMMIT_TEST.CUSTOMERS
