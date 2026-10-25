@@ -348,6 +348,57 @@ allow aiw26zpr2026.role:application endpoints in aiw26zpr2026.networks:frontend 
 <!-- ============================================================ DATA SAFE -->
 <section data-tab="5 Data Safe">
   <div class="meta"><b>Phoenix</b> · compartment <b>Incident05DataSafeDemo</b> · DB <code>aiw26-incident05-db</code> · target <code>aiw26-incident05-target</code>. Start: test copy unmasked; tester has the extra source grant.</div>
+  <details class="hook" id="hook-ds">
+    <summary>Opening hook · about 2 minutes<span class="hb"></span></summary>
+    <div class="hook-body">
+      <h3>1 · Quiz on screen (run step 1 first, say nothing)</h3>
+      <p class="cue">Leave the three rows on screen: Asha Rao, asha.rao@example.com, 202-555-0101. Let the room read for three seconds.</p>
+      <p class="line">"Quick quiz. Just shout it out: production, or test?"</p>
+      <p class="cue">Let a few voices answer.</p>
+      <p class="line">"It's test. And it has real customer names, emails and phone numbers in it."</p>
+      <p class="line">"For this demo every record is invented. At Summit Retail, they were real."</p>
+
+      <h3>2 · Why test is the soft spot</h3>
+      <p class="line">"Production gets the firewalls, the MFA, the reviews. Test gets copied in a hurry so developers can work. Fewer controls, more people, and often the same real data."</p>
+      <p class="line">"In early 2024, a major software company disclosed that attackers got in through an old account in a non-production test environment, one without MFA. Nobody watches test as closely, and attackers know it."</p>
+
+      <h3>3 · Summit Retail</h3>
+      <p class="line">"Someone copied customer records into the test schema so testers had realistic orders. Fair enough: testing with fake-looking data misses real bugs."</p>
+      <p class="line">"But now three things are wrong, and nobody has noticed them yet."</p>
+      <p class="line"><b>"Can we give testers realistic data, without giving them real people?"</b></p>
+      <p class="cue">Two-second pause.</p>
+      <p class="line">"Three steps: find it, mask it, and close the door nobody saw."</p>
+
+      <h3>4 · At discovery (step 2)</h3>
+      <p class="line">"First we find it. You can't protect a column you don't know about. Data Safe reads names, comments and sample values, and suggests the sensitive ones."</p>
+      <p class="cue">If CITY appears: "It suggests; we decide. We keep CITY for regional reports."</p>
+
+      <h3>5 · At the user assessment (step 3)</h3>
+      <p class="line">"Rated low risk. No admin roles. And still..."</p>
+      <p class="cue">Run the tester query: 12.</p>
+      <p class="line">"...the test account can read the source. Low risk is not the same as least privilege. That's the door nobody saw."</p>
+
+      <h3>6 · At masking (steps 4–5)</h3>
+      <p class="line">"Names become random. Emails keep the @example.com shape, phones stay in a fictional range, so the application's checks still pass. And CUSTOMER_ID stays, so the orders still join."</p>
+
+      <h3>7 · At the proof (step 6)</h3>
+      <p class="line">"Same 18 orders, same 2200. The testers lost nothing they needed. The identities are gone, the source is untouched, and the tester now gets ORA-00942."</p>
+
+      <h3>Close</h3>
+      <p class="line"><b>"Find it, mask it, close the door. Discovery, masking and least privilege solve three different problems, and Data Safe found the problem but didn't fix the grant: we did."</b></p>
+
+      <h3>If they ask</h3>
+      <p><b>Masking vs encryption vs redaction?</b> Encryption protects stolen files; authorised users still see real data. Redaction hides values on screen; data is still real. Masking replaces the data in the copy.</p>
+      <p><b>Can we unmask?</b> No, by design. The source stays untouched; mask a fresh copy at each refresh.</p>
+      <p><b>Does it change the database itself?</b> Yes, in place. That's why it only ever runs on the test copy, never production.</p>
+      <p><b>Why keep CUSTOMER_ID?</b> The joins. Real systems mask keys consistently instead.</p>
+      <p><b>Cost?</b> Most Data Safe features are included for OCI databases; check the price list before quoting.</p>
+
+      <h3>Short version (20 seconds)</h3>
+      <p class="line">"This is test data, with real names in it. Test gets copied in a hurry and watched less. Let's find the sensitive columns, replace them, and close the access nobody noticed, without breaking a single order."</p>
+      <p class="cue">Say "a major software company". Don't name it or add details.</p>
+    </div>
+  </details>
   <ol class="steps">
     <li><div class="do"><span class="who w-i">ADMIN</span><code>aiw26-incident05-db</code> › <b>Database actions</b> › <b>SQL</b>.</div>
       <div class="code"><div class="lbl">Test identities</div><pre>select customer_id, first_name, last_name, email, phone_number, city
